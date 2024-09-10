@@ -1,0 +1,84 @@
+<style>
+<%# :root { %>
+<%#   view-transition-name: root; %>
+<%# } %>
+
+<%# @view-transition { %>
+<%#   navigation: auto; %>
+<%# } %>
+
+<%# /* Create a custom animation */ %>
+<%# @keyframes move-out { %>
+<%#   from { %>
+<%#     transform: translateX(0%); %>
+<%#   } %>
+
+<%#   to { %>
+<%#     transform: translateX(-100%); %>
+<%#   } %>
+<%# } %>
+
+<%# @keyframes move-in { %>
+<%#   from { %>
+<%#     transform: translateX(100%); %>
+<%#   } %>
+
+<%#   to { %>
+<%#     transform: translateX(0%); %>
+<%#   } %>
+<%# } %>
+
+<%# /* Apply the custom animation to the old and new page states */ %>
+
+<%# ::view-transition-old(root) { %>
+<%#   animation: 0.25s ease-in both move-out; %>
+<%# } %>
+
+<%# ::view-transition-new(root) { %>
+<%#   animation: 0.25s ease-in both move-in; %>
+<%# } %>
+
+.slideshow {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) minmax(0, auto);
+  height: 100%;
+  padding-bottom: 40px;
+}
+
+.slide-container {
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+.slideshow__footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 40px;
+}
+</style>
+
+<div id="slideshow" class="slideshow">
+  <div id="slideshow-container" class="slide-container">
+    <%= render partial: "slide_#{@slide_number}" %>
+  </div>
+
+  <div
+    id="slideshow-footer"
+    class="slideshow__footer"
+  >
+    <div>
+      <% visibility = @slide_number <= 1 ? "hidden" : "visible" %>
+    <a data-turbo-stream style="<%= "visibility: #{visibility};" %>" href="/slides/<%= @slide_number - 1 %>">Previous Slide</a>
+    </div>
+
+    <div>Slide <%= @slide_number %> of <%= @slide_count %></div>
+
+    <div>
+      <% visibility = @slide_number < @slide_count ? "visible" : "hidden" %>
+      <a data-turbo-stream style="<%= "visibility: #{visibility};" %>" href="/slides/<%= @slide_number + 1 %>">Next Slide</a>
+    </div>
+  </div>
+</div>

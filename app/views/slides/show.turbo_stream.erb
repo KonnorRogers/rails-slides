@@ -1,0 +1,6 @@
+<turbo-stream action="update" method="morph" target="main">
+  <template>
+  <!-- The contents of this template will replace the everything in the document via morph since we did <html id="html">. -->
+    <%= render template: "slides/show", layout: false, formats: [:html] %>
+  </template>
+</turbo-stream>

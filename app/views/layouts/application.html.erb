@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html id="html">
+  <head>
+    <title><%= content_for(:title) || "Rails Slides" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%# <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %1> %>
+    <%= javascript_importmap_tags %>
+    <style id="global-styles">
+      *, *:before, *:after {
+        box-sizing: border-box;
+      }
+
+      html {
+        height: 100%;
+        min-height: 100%;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr);
+      }
+
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      main {
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body id="body">
+    <main id="main">
+      <%= yield %>
+    </main>
+  </body>
+</html>
